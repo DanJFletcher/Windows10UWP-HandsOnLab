@@ -1,0 +1,72 @@
+<Page x:Class="HowToBBQ.Win10.Views.DetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Behaviors="using:Template10.Behaviors"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:HowToBBQ.Win10.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:HowToBBQ.Win10.ViewModels" x:Name="ThisPage" mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:DetailPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  header  -->
+        <controls:PageHeader Frame="{x:Bind Frame}" Text="Detail Page">
+            <Interactivity:Interaction.Behaviors>
+                <Behaviors:EllipsisBehavior Visibility="Auto" />
+            </Interactivity:Interaction.Behaviors>
+        </controls:PageHeader>
+
+        <!--  content  -->
+        <Grid Grid.Row="1" x:Name="BBQRecipeGridView" Grid.RowSpan="2" Margin="46,0,50,0" DataContext="{Binding Recipe}">
+            <StackPanel Orientation="Vertical" d:LayoutOverrides="Height">
+                <StackPanel x:Name="ImageStackPanel"  Orientation="Vertical">
+                    <Image x:Name="BBQImage" Source="{Binding ImageUri}" Stretch="UniformToFill" />
+                </StackPanel>
+                <StackPanel x:Name="DetailstackPanel" Orientation="Vertical" HorizontalAlignment="Left" d:LayoutOverrides="LeftPosition, RightPosition">
+                    <StackPanel Margin="0,20,20,10">
+                        <TextBlock Text="ImageUri" FontSize="14"/>
+                        <TextBox  Text="{Binding ImagePath}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,20,20,10">
+                        <TextBlock Text="Name" FontSize="14"/>
+                        <TextBox x:Name="TextBoxTitle" Text="{Binding Name, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,20,10">
+                        <TextBlock Text="Prep Time" FontSize="14"/>
+                        <TextBox Text="{Binding PrepTime, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,20,10">
+                        <TextBlock Text="Total Time" FontSize="14"/>
+                        <TextBox Text="{Binding TotalTime, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,20,10">
+                        <TextBlock Text="Serves" FontSize="14"/>
+                        <TextBox Text="{Binding Serves, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,20,10">
+                        <TextBlock Text="Ingredients" FontSize="14"/>
+                        <TextBox Text="{Binding Ingredients, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,20,10">
+                        <TextBlock Text="Directions" FontSize="14"/>
+                        <TextBox Text="{Binding Directions, Mode=TwoWay}" Height="150" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
+
